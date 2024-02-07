@@ -2,7 +2,7 @@
     "name": "Wolfram Alpha Cat",
     "description": "Connects the cat to the Wolfram Alpha using its free API. How to use it? Just add ~ to the end of your prompt. Example: x³+y³+z³=k~",
     "author_name": "Pazoff",
-    "tags": "wolfram,alpha,computation",
+    "tags": "wolfram,alpha,computation,Mathematics,Physics,Computer Science,Engineering",
     "plugin_url": "https://github.com/pazoff/wolfram-alpha-cat",
     "thumb": "https://raw.githubusercontent.com/pazoff/wolfram-alpha-cat/main/wolframalpha-cat-logo.jpg",
     "version": "0.0.1"
