@@ -2,7 +2,6 @@ from cat.mad_hatter.decorators import tool, hook, plugin
 from cat.log import log
 from pydantic import BaseModel
 import wolframalpha
-import xml.etree.ElementTree as ET
 
 
 # Settings
