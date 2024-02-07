@@ -57,15 +57,16 @@ def agent_fast_reply(fast_reply, cat):
     # Get user message from the working memory
     message = cat.working_memory["user_message_json"]["text"]
     
-    # Check if the message ends with '~' to trigger manual web search
+    # Check if the message ends with '~'
     if message.endswith('~'):
-        # Remove '~' and perform manual web search
+        # Remove '~' 
         message = message[:-1]
         
         cat.send_ws_message(content='Querying Wolfram Alpha for ' + message + ' ...', msg_type='chat_token')
         result_from_wolframalpha = query_wolfram_alpha(message, cat)
 
-        log.warning(result_from_wolframalpha)
+        #log.warning(result_from_wolframalpha)
+        print(result_from_wolframalpha)
         return {"output": result_from_wolframalpha}
 
     return None
