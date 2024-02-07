@@ -7,3 +7,5 @@ Connects the [Cheshire Cat](https://github.com/cheshire-cat-ai/core) to the [Wol
 Just add ~ to the end of your prompt.
 ### Example:
 x³+y³+z³=k~
+
+<img width="80%" src="https://raw.githubusercontent.com/pazoff/wolfram-alpha-cat/main/Wolfram-Alpha-Cat-demo.png">
