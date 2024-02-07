@@ -1,0 +1,9 @@
+{
+    "name": "Wolfram Alpha Cat",
+    "description": "Connects the cat to the Wolfram Alpha using its free API",
+    "author_name": "Pazoff",
+    "tags": "wolfram,alpha,computation",
+    "plugin_url": "https://github.com/pazoff/wolfram-alpha-cat",
+    "thumb": "",
+    "version": "0.0.1"
+}
