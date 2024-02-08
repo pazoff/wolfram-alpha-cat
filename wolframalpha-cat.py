@@ -76,7 +76,7 @@ def query_wolfram_alpha(query, cat):
                     result_text += sub.plaintext + " <br><br> "  # Append plaintext result to the string variable
 
         if len(result_text) == 0:
-            print("Wolfram Alpha has returned no results - " + str(res))
+            log.warning("Wolfram Alpha has returned no results - " + str(res))
             #return "Wolfram Alpha has returned no results."
             return
         else:
@@ -94,6 +94,7 @@ def query_wolfram_alpha(query, cat):
     except Exception as e:
         # Handle any exceptions that occur during the Wolfram Alpha query
         error_message = f"Wolfram Alpha Cat: An error occurred: {str(e)}"
+        log.error(error_message)
         return error_message
 
 
@@ -112,7 +113,7 @@ def agent_fast_reply(fast_reply, cat):
         cat.send_ws_message(content='Querying Wolfram Alpha for ' + message + ' ...', msg_type='chat_token')
         result_from_wolframalpha = query_wolfram_alpha(message, cat)
 
-        #log.warning(result_from_wolframalpha)
+        log.warning(result_from_wolframalpha)
         #print(result_from_wolframalpha)
         if result_from_wolframalpha:
             return {"output": result_from_wolframalpha}
