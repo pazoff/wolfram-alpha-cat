@@ -113,9 +113,9 @@ def agent_fast_reply(fast_reply, cat):
         cat.send_ws_message(content='Querying Wolfram Alpha for ' + message + ' ...', msg_type='chat_token')
         result_from_wolframalpha = query_wolfram_alpha(message, cat)
 
-        log.warning(result_from_wolframalpha)
         #print(result_from_wolframalpha)
         if result_from_wolframalpha:
+            log.warning(result_from_wolframalpha)
             return {"output": result_from_wolframalpha}
         else:
             cat.send_ws_message(content='Wolfram Alpha has returned no results.', msg_type='chat')
