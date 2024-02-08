@@ -14,6 +14,44 @@ class WolframAlphaCatSettings(BaseModel):
 def settings_schema():
     return WolframAlphaCatSettings.schema()
 
+def parse_wolfram_alpha_response(data):
+    output = ""
+
+    for pod in data['pod']:
+        title = pod['@title']
+        output += f"<br><b>{title}:</b>\n"
+
+        if 'subpod' in pod:
+            subpod = pod['subpod']
+            if isinstance(subpod, list):
+                for sp in subpod:
+                    plaintext = sp['plaintext']
+                    if plaintext:
+                        output += f"{plaintext}<br>\n"
+            else:
+                plaintext = subpod['plaintext']
+                if plaintext:
+                    output += f"{plaintext}<br>\n"
+        try:
+            img_src = pod.get('subpod', {}).get('img', {}).get('@src')
+            if img_src:
+                output += f"<img src='{img_src}' alt='{title}' title='{title}'/>\n"
+        except:
+            pass
+
+        output += "\n"
+    try:
+        sources = data.get('sources', {}).get('source')
+        if sources:
+            source_text = sources.get('@text', '')
+            source_url = sources.get('@url', '')
+            output += f"<b>Source:</b>\n{source_text} (More information: {source_url})\n"
+    except:
+        pass
+
+    return output
+
+
 def query_wolfram_alpha(query, cat):
     # Load the plugin settings
     settings = cat.mad_hatter.get_plugin().load_settings()
@@ -38,11 +76,19 @@ def query_wolfram_alpha(query, cat):
                     result_text += sub.plaintext + " <br><br> "  # Append plaintext result to the string variable
 
         if len(result_text) == 0:
-            return "Wolfram Alpha returned no results."
+            print(str(res))
+            return "Wolfram Alpha has returned no results."
         else:
             #cat.send_ws_message(content=' The Cat is Thinking ...', msg_type='chat_token')
             #llm_result = cat.llm(f"{query} based on: {result_text}")
-            return result_text
+            #print(str(res))
+            try:
+                parsed_text = parse_wolfram_alpha_response(res)
+            except Exception as err:
+                log.error(str(err))
+                parsed_text = result_text
+
+            return parsed_text
 
     except Exception as e:
         # Handle any exceptions that occur during the Wolfram Alpha query
