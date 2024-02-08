@@ -76,8 +76,9 @@ def query_wolfram_alpha(query, cat):
                     result_text += sub.plaintext + " <br><br> "  # Append plaintext result to the string variable
 
         if len(result_text) == 0:
-            print(str(res))
-            return "Wolfram Alpha has returned no results."
+            print("Wolfram Alpha has returned no results - " + str(res))
+            #return "Wolfram Alpha has returned no results."
+            return
         else:
             #cat.send_ws_message(content=' The Cat is Thinking ...', msg_type='chat_token')
             #llm_result = cat.llm(f"{query} based on: {result_text}")
@@ -98,7 +99,7 @@ def query_wolfram_alpha(query, cat):
 
 @hook(priority=5)
 def agent_fast_reply(fast_reply, cat):
-    return_direct = True
+    #return_direct = True
 
     # Get user message from the working memory
     message = cat.working_memory["user_message_json"]["text"]
@@ -112,7 +113,11 @@ def agent_fast_reply(fast_reply, cat):
         result_from_wolframalpha = query_wolfram_alpha(message, cat)
 
         #log.warning(result_from_wolframalpha)
-        print(result_from_wolframalpha)
-        return {"output": result_from_wolframalpha}
+        #print(result_from_wolframalpha)
+        if result_from_wolframalpha:
+            return {"output": result_from_wolframalpha}
+        else:
+            cat.send_ws_message(content=' Wolfram Alpha has returned no results. The Cat is Thinking ...', msg_type='chat_token')
 
-    return None
+
+    return fast_reply
