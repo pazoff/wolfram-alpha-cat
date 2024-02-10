@@ -3,7 +3,7 @@ Turn ★ into ⭐ (top-right corner) if you like the project!
 
 Connects the [Cheshire Cat](https://github.com/cheshire-cat-ai/core) to the [Wolfram Alpha](https://www.wolframalpha.com/) using its free [API](https://products.wolframalpha.com/api).
 
-Get API access - https://products.wolframalpha.com/api
+Get API access - https://products.wolframalpha.com/api (Use - Full results API)
 
 ## How to use it?
 Just add ~ to the end of your prompt.
